@@ -15,7 +15,7 @@ namespace LibraryDevelopmentTask.Services
         }
         public async Task<Book?> GetBook(string isbn)
         {
-            var book = await _repository.GetByIDAsync(isbn);
+            var book = await _repository.GetByIdAsync(isbn);
 
             return book;
         }

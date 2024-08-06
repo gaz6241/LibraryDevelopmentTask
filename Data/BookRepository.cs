@@ -7,7 +7,7 @@ namespace LibraryDevelopmentTask.Data
     {
         private readonly List<Book> _books = new();
 
-        public async Task<Book?> GetByIDAsync(string id)
+        public async Task<Book?> GetByIdAsync(string id)
         {
             var book = await Task.FromResult(_books.SingleOrDefault(b => b.ISBN == id));
             return book;
