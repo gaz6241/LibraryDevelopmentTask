@@ -53,7 +53,6 @@ namespace LibraryDevelopmentTask
             {
                 Console.Write("ISBN: ");
                 var isbn = Console.ReadLine();
-
                 var book = await _bookService.GetBookByIsbn(isbn);
 
                 if (book == null)

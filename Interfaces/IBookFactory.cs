@@ -1,6 +1,4 @@
-﻿using LibraryDevelopmentTask.Interfaces;
-
-namespace LibraryDevelopmentTask
+﻿namespace LibraryDevelopmentTask.Interfaces
 {
     public interface IBookFactory
     {
