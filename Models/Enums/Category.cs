@@ -2,7 +2,7 @@
 {
     public enum Category
     {
-        Fiction,
-        NonFiction
+        Fiction = 1,
+        NonFiction = 2
     }
 }

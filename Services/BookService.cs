@@ -7,15 +7,23 @@ namespace LibraryDevelopmentTask.Services
 {
     public class BookService : IBookService
     {
-        private readonly IRepository<Book> _repository;
+        private readonly IBookRepository _repository = new BookRepository();
 
         public BookService()
         {
             _repository = new BookRepository();
         }
-        public async Task<Book?> GetBook(string isbn)
+
+        public async Task<IBook?> GetBookById(int id)
         {
-            var book = await _repository.GetByIdAsync(isbn);
+            var book = await _repository.GetByIdAsync(id);
+
+            return book;
+        }
+
+        public async Task<IBook?> GetBookByIsbn(string isbn)
+        {
+            var book = await _repository.GetByIsbnAsync(isbn);
 
             return book;
         }
@@ -27,7 +35,7 @@ namespace LibraryDevelopmentTask.Services
             return await _repository.AddAsync(book);
         }
 
-        public async Task<bool> UpdateBook(Book book)
+        public async Task<bool> UpdateBook(IBook book)
         {
             return await _repository.UpdateAsync(book);
         }

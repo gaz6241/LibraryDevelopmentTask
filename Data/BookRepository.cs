@@ -1,42 +1,31 @@
 ﻿using LibraryDevelopmentTask.Interfaces;
-using LibraryDevelopmentTask.Models;
 
 namespace LibraryDevelopmentTask.Data
 {
-    public class BookRepository : IRepository<Book>
+    public class BookRepository : Repository<IBook>, IBookRepository
     {
-        private readonly List<Book> _books = new();
+        private static List<IBook> _books = new();
 
-        public async Task<Book?> GetByIdAsync(string id)
+        public BookRepository() : base(_books)
         {
-            var book = await Task.FromResult(_books.SingleOrDefault(b => b.ISBN == id));
+        }
+
+        public async Task<IBook?> GetByIsbnAsync(string isbn)
+        {
+            var book = await Task.FromResult(_books.SingleOrDefault(b => b.ISBN == isbn));
             return book;
         }
 
-        public async Task<int> AddAsync(Book book)
+        public async Task<IBook?> GetByTitleAsync(string title)
         {
-            _books.Add(book);
-            var idx = _books.IndexOf(book);
-
-            return idx + 1;
+            var book = await Task.FromResult(_books.SingleOrDefault(b => b.Title == title));
+            return book;
         }
 
-        public async Task<bool> UpdateAsync(Book book)
+        public async Task<IEnumerable<IBook>> GetByAuthorAsync(string author)
         {
-            var bookToUpdate = _books.SingleOrDefault(b => b.ISBN == book.ISBN);
-
-            if (bookToUpdate == null)
-            {
-                return false;
-            }
-
-            bookToUpdate = book;
-            return true;
-        }
-
-        public async Task DeleteAsync(int accountNo)
-        {
-            throw new NotImplementedException();
+            IEnumerable<IBook> books = await Task.FromResult(_books.Where(b => b.Author == author));
+            return books;
         }
     }
 }

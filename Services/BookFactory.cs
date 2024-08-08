@@ -1,10 +1,11 @@
 ﻿using LibraryDevelopmentTask.Models;
+using LibraryDevelopmentTask.Interfaces;
 
 namespace LibraryDevelopmentTask.Services
 {
     public class FictionBookFactory : IBookFactory
     {
-        public Book AddBook(string title, string author, string isbn)
+        public IBook AddBook(string title, string author, string isbn)
         {
             return new FictionBook { Title = title, Author = author, ISBN = isbn };
         }
@@ -12,7 +13,7 @@ namespace LibraryDevelopmentTask.Services
 
     public class NonFictionBookFactory : IBookFactory
     {
-        public Book AddBook(string title, string author, string isbn)
+        public IBook AddBook(string title, string author, string isbn)
         {
             return new NonFictionBook { Title = title, Author = author, ISBN = isbn };
         }

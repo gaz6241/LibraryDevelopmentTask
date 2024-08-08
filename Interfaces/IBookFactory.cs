@@ -1,9 +1,9 @@
-﻿using LibraryDevelopmentTask.Models;
+﻿using LibraryDevelopmentTask.Interfaces;
 
 namespace LibraryDevelopmentTask
 {
     public interface IBookFactory
     {
-        Book AddBook(string title, string author, string isbn);
+        IBook AddBook(string title, string author, string isbn);
     }
 }

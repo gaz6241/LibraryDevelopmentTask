@@ -7,7 +7,6 @@ namespace LibraryDevelopmentTask
     internal class Program
     {
         private static readonly IBookService _bookService = new BookService();
-        //private static readonly IUserService _userService = new UserService();
 
         static async Task Main(string[] args)
         {
@@ -19,6 +18,7 @@ namespace LibraryDevelopmentTask
                 Console.WriteLine("1. Add book");
                 Console.WriteLine("2. Update book");
                 Console.WriteLine("3. Delete book");
+                Console.WriteLine("4. See book details");
                 Console.WriteLine("99. Exit");
                 Console.Write("\nEnter choice: ");
                 string choice = Console.ReadLine();
@@ -34,6 +34,9 @@ namespace LibraryDevelopmentTask
                     case "3":
                         await DeleteBook();
                         break;
+                    case "4":
+                        await GetBook();
+                        break;
                     case "99":
                         userLoggedIn = false;
                         break;
@@ -41,6 +44,31 @@ namespace LibraryDevelopmentTask
                         Console.WriteLine("Invalid choice.");
                         break;
                 }
+            }
+        }
+
+        private static async Task<IBook?> GetBook()
+        {
+            try
+            {
+                Console.Write("ISBN: ");
+                var isbn = Console.ReadLine();
+
+                var book = await _bookService.GetBookByIsbn(isbn);
+
+                if (book == null)
+                {
+                    Console.WriteLine("Book not found");
+                    return null;
+                }
+
+                return book;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Toast message");
+                //log
+                return null;
             }
         }
 
@@ -56,7 +84,7 @@ namespace LibraryDevelopmentTask
                 var author = Console.ReadLine();
                 Console.Write("Category: 0) Fiction 1) Non-Fiction ");
                 var category = Console.ReadLine();
-                
+
                 //todo:validate input
 
                 if (!int.TryParse(category, out int value))
@@ -66,7 +94,7 @@ namespace LibraryDevelopmentTask
                 }
 
                 var id = await _bookService.AddBook(title, author, isbn, (Category)value);
-                
+
                 Console.WriteLine("Book added successfully");
             }
             catch (Exception ex)
@@ -76,12 +104,12 @@ namespace LibraryDevelopmentTask
             }
         }
 
-        private static async Task DeleteBook()
+        private static async Task UpdateBook()
         {
             throw new NotImplementedException();
         }
 
-        private static async Task UpdateBook()
+        private static async Task DeleteBook()
         {
             throw new NotImplementedException();
         }

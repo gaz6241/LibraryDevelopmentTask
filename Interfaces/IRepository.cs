@@ -1,10 +1,8 @@
-﻿using LibraryDevelopmentTask.Models;
-
-namespace LibraryDevelopmentTask.Interfaces
+﻿namespace LibraryDevelopmentTask.Interfaces
 {
-    internal interface IRepository<T>
+    public interface IRepository<T>
     {
-        Task<Book?> GetByIdAsync(string id);
+        Task<T?> GetByIdAsync(int id);
         Task<int> AddAsync(T item);
         Task<bool> UpdateAsync(T item);
         Task DeleteAsync(int id);
