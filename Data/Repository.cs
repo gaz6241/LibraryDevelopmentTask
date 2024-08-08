@@ -13,7 +13,7 @@ namespace LibraryDevelopmentTask.Data
 
         public async Task<int> AddAsync(T item)
         {
-            var id = _db.Count() + 1;
+            var id = _db.Count() + 1; //todo: change to guid
             item.SetId(id);
             _db.Add(item);
             return id;
