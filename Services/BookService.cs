@@ -1,13 +1,12 @@
-﻿using LibraryDevelopmentTask.Models;
-using LibraryDevelopmentTask.Models.Enums;
+﻿using LibraryDevelopmentTask.Data;
 using LibraryDevelopmentTask.Interfaces;
-using LibraryDevelopmentTask.Data;
+using LibraryDevelopmentTask.Models.Enums;
 
 namespace LibraryDevelopmentTask.Services
 {
     public class BookService : IBookService
     {
-        private readonly IBookRepository _repository = new BookRepository();
+        private readonly IBookRepository _repository;
 
         public BookService()
         {
@@ -45,7 +44,7 @@ namespace LibraryDevelopmentTask.Services
             throw new NotImplementedException();
         }
 
-        private IBookFactory GetBookFactory(Category category)
+        private static IBookFactory GetBookFactory(Category category)
         {
             IBookFactory factory;
 

@@ -4,7 +4,7 @@ namespace LibraryDevelopmentTask.Data
 {
     public class BookRepository : Repository<IBook>, IBookRepository
     {
-        private static List<IBook> _books = new();
+        private static readonly List<IBook> _books = new();
 
         public BookRepository() : base(_books)
         {
